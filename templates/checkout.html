@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Checkout</h1>
+    <p>Total amount to be paid: ${{ total_price }}</p>
+    <p>Thank you for your order!  (This is a simplified checkout.)</p>
+    <a href="{{ url_for('index') }}">Back to Products</a>
+</body>
+</html>
