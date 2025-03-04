@@ -1,3 +1,5 @@
+FROM registry.access.redhat.com/ubi9/ubi-minimal:latest  #This line MUST be first, no spaces before
+
 RUN microdnf update -y && \
     microdnf install -y mysql-devel gcc python3-devel && \
     microdnf clean all
@@ -17,4 +19,3 @@ ENV FLASK_RUN_PORT=5000
 EXPOSE 5000
 
 CMD ["python3", "-m", "flask", "run"]
-```
