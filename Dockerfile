@@ -1,10 +1,9 @@
-FROM centos:9
+FROM python:3.9-alpine3.19
 
 WORKDIR /app
 
-RUN yum update -y && \
-    yum install -y mysql-devel gcc python3-devel && \
-    yum clean all
+RUN apk update && \
+    apk add --no-cache mysql-client gcc musl-dev python3-dev libffi-dev openssl-dev
 
 COPY requirements.txt .
 RUN pip3 install --upgrade pip
