@@ -1,12 +1,14 @@
-FROM python:3.9-slim-buster
+FROM centos:9
 
 WORKDIR /app
 
-COPY requirements.txt .
-RUN yum update -y && yum install -y mysql-devel gcc python3-devel
+RUN yum update -y && \
+    yum install -y mysql-devel gcc python3-devel && \
+    yum clean all
 
-RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
+COPY requirements.txt .
+RUN pip3 install --upgrade pip
+RUN pip3 install --no-cache-dir -r requirements.txt
 
 COPY . .
 
@@ -16,4 +18,4 @@ ENV FLASK_RUN_PORT=5000
 
 EXPOSE 5000
 
-CMD ["flask", "run"]
+CMD ["python3", "-m", "flask", "run"]
