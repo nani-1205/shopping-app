@@ -1,10 +1,9 @@
-FROM registry.access.redhat.com/ubi9/ubi-minimal:latest  #This line MUST be first, no spaces before
-
-RUN microdnf update -y && \
-    microdnf install -y mysql-devel gcc python3-devel && \
-    microdnf clean all
+FROM python:3.9-alpine3.19
 
 WORKDIR /app
+
+RUN apk update && \
+    apk add --no-cache mysql-client gcc musl-dev python3-dev libffi-dev openssl-dev
 
 COPY requirements.txt .
 RUN pip3 install --upgrade pip
