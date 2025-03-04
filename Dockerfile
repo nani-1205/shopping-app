@@ -1,9 +1,10 @@
+FROM centos:9
+
 WORKDIR /app
 
-RUN apk update &&     apk add --no-cache mysql-client gcc musl-dev python3-dev libffi-dev openssl-dev pkgconfig
-
-ENV MYSQLCLIENT_CFLAGS="-I/usr/include/mysql"
-ENV MYSQLCLIENT_LDFLAGS="-L/usr/lib/mysql"
+RUN yum update -y && \
+    yum install -y mysql-devel gcc python3-devel && \
+    yum clean all
 
 COPY requirements.txt .
 RUN pip3 install --upgrade pip
@@ -18,4 +19,3 @@ ENV FLASK_RUN_PORT=5000
 EXPOSE 5000
 
 CMD ["python3", "-m", "flask", "run"]
-```
